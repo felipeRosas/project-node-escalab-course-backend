@@ -1,0 +1,33 @@
+{
+  "name": "project-node-escalab-course-backend",
+  "version": "1.0.0",
+  "description": "project for course backend nodejs escalab, development of api for system of register of an veterinary",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipeRosas/project-node-escalab-course-backend.git"
+  },
+  "author": "felipe rosas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipeRosas/project-node-escalab-course-backend/issues"
+  },
+  "homepage": "https://github.com/felipeRosas/project-node-escalab-course-backend#readme",
+  "dependencies": {
+    "cors": "2.8.5",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "express-validator": "6.13.0",
+    "mongoose": "5.10.2",
+    "morgan": "1.10.0",
+    "nodemon": "2.0.15",
+    "slugify": "1.4.5",
+    "swagger-jsdoc": "6.0.2",
+    "swagger-ui-express": "4.1.6"
+  }
+}
