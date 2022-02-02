@@ -19,7 +19,7 @@ const consultationSchema = new mongoose.Schema(
             ref: 'Patient'
         },
         weightPatient: {
-            type: number,
+            type: Number,
         },
         dateNextConsultation: {
             type: Date,

@@ -10,10 +10,10 @@ const typeOfVaccine = new mongoose.Schema(
         description: {
             type: String,
         },
-        species: [{
+        species: {
             type: ObjectId,
             ref: 'Specie'
-        }],
+        },
         
     },
     { timestamp: true },
