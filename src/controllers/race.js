@@ -1,11 +1,12 @@
-const Specie = require('../models/specie')
+const Race = require('../models/race')
 const slugify = require('slugify')
 
 exports.create = async (req, res) => {
     try {
+        console.log("CREATE RACE");
         req.body.slug = slugify(req.body.name)
-        const newSpecie = await new Specie(req.body).save()
-        return res.json(newSpecie)
+        const newRace = await new Race(req.body).save()
+        return res.json(newRace)
     } catch (error) {
         res.status(400).json({
             error: error.message,
@@ -19,7 +20,7 @@ exports.update = async (req, res) => {
         if(req.body.name){
             req.body.slug = slugify(req.body.name)
         }
-        const updated = await Specie.findOneAndUpdate(
+        const updated = await Race.findOneAndUpdate(
             { slug: req.params.slug },
             req.body,
             {new: true}
@@ -35,7 +36,7 @@ exports.update = async (req, res) => {
 
 exports.read = async (req, res) => {
     try {
-        const specie = await Specie.findOne( {slug:req.params.slug} ).exec()
+        const specie = await Race.findOne( {slug:req.params.slug} ).exec()
         res.json(specie)
     } catch (error) {
         res.status(400).json({
@@ -47,9 +48,7 @@ exports.read = async (req, res) => {
 
 exports.listAll = async (req, res) => {
     try {
-        console.log("listall");
-        const species = await Specie.find({}).limit( parseInt(req.params.count) ).exec()
-        console.log(species);
+        const species = await Race.find({}).limit( parseInt(req.params.count) ).exec()
         res.json(species)
     } catch (error) {
         res.status(400).json({
@@ -61,7 +60,7 @@ exports.listAll = async (req, res) => {
 
 exports.remove = async (req, res) => {
     try {
-        const deleted = await Specie.findOneAndRemove( {slug: req.params.slug} ).exec()
+        const deleted = await Race.findOneAndRemove( {slug: req.params.slug} ).exec()
         res.json(deleted)
     } catch (error) {
         res.status(400).json({

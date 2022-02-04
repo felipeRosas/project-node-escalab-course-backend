@@ -6,6 +6,9 @@ const specieSchema = new mongoose.Schema(
         name: {
             type: String,
             required: true,
+            trim: true,
+            minlength: [2, "Too short"],
+            maxlength: [32, "Too long"],
         },
         slug: {
             type: String,
