@@ -59,6 +59,18 @@ exports.listAll = async (req, res) => {
     }
 }
 
+exports.getAll = async (req, res) => {
+    try {
+        const species = await Specie.find({}).exec()
+        res.json(species)
+    } catch (error) {
+        res.status(400).json({
+            error: error.message,
+            code: error.code
+        })
+    }
+}
+
 exports.remove = async (req, res) => {
     try {
         const deleted = await Specie.findOneAndRemove( {slug: req.params.slug} ).exec()
