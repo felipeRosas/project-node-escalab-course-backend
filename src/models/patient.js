@@ -6,14 +6,17 @@ const patientSchema = new mongoose.Schema(
         name: {
             type: String,
             required: true,
+            minlength: [2, 'too short name'],
+            maxlength: [32, 'too long name']
         },
         color: {
             type: String,
+            lowercase: true
         },
         chipNumber: {
             type: Number,
         },
-        dateOFBirth: {
+        dateOfBirth: {
             type: Date,
             required: true
         },

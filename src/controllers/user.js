@@ -1,12 +1,14 @@
-const Race = require('../models/race')
+const User = require('../models/user')
 const slugify = require('slugify')
 
 exports.create = async (req, res) => {
     try {
-        console.log("CREATE RACE");
-        req.body.slug = slugify(req.body.name)
-        const newRace = await new Race(req.body).save()
-        return res.json(newRace)
+        console.log("CREATE USER", req.body);
+        const {name, lastName} = req.body
+        console.log({name, lastName})
+        req.body.slug = slugify(`${name.toLowerCase()} ${lastName.toLowerCase()}`)
+        const newUser = await new User(req.body).save()
+        return res.json(newUser)
     } catch (error) {
         res.status(400).json({
             error: error.message,
@@ -17,11 +19,8 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        if(req.body.name){
-            req.body.slug = slugify(req.body.name)
-        }
-        const updated = await Race.findOneAndUpdate(
-            { slug: req.params.slug },
+        const updated = await User.findOneAndUpdate(
+            { _id: req.body._id },
             req.body,
             {new: true}
         ).exec()
@@ -34,10 +33,10 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.read = async (req, res) => {
+exports.getById = async (req, res) => {
     try {
-        const specie = await Race.findOne( {"slug":req.params.slug} ).exec()
-        res.json(specie)
+        const user = await User.findOne( {_id:req.params._id} ).exec()
+        res.json(user)
     } catch (error) {
         res.status(400).json({
             error: error.message,
@@ -46,10 +45,10 @@ exports.read = async (req, res) => {
     }
 }
 
-exports.getBySpecie = async (req, res) => {
+exports.getByName = async (req, res) => {
     try {
-        const races = await Race.find({"specie":req.params.specie})
-        return res.json(races)
+        const User = await User.find({slug: req.params.slug}).exec()
+        return res.json(User)
     } catch (error) {
         res.status(400).json({
             error: error.message,
@@ -60,8 +59,8 @@ exports.getBySpecie = async (req, res) => {
 
 exports.listAll = async (req, res) => {
     try {
-        const species = await Race.find({}).limit( parseInt(req.params.count) ).exec()
-        res.json(species)
+        const users = await User.find({}).exec()
+        res.json(users)
     } catch (error) {
         res.status(400).json({
             error: error.message,
@@ -72,7 +71,7 @@ exports.listAll = async (req, res) => {
 
 exports.remove = async (req, res) => {
     try {
-        const deleted = await Race.findOneAndRemove( {"slug": req.params.slug} ).exec()
+        const deleted = await User.findOneAndRemove( {slug: req.params.slug} ).exec()
         res.json(deleted)
     } catch (error) {
         res.status(400).json({

@@ -11,9 +11,15 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        slug: {
+            type: String,
+            unique: true,
+            lowercase: true,
+            index: true,
+          },
         role: {
             type: String,
-            enum: ["owner", "veterinarian"],
+            enum: ["owner", "veterinarian", "admin"],
             default: 'owner'
         },
         address: {
@@ -24,7 +30,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        dateOFBirth: {
+        dateOfBirth: {
             type: Date,
             required: true
         },

@@ -7,6 +7,12 @@ const typeOfVaccine = new mongoose.Schema(
             type: String,
             required: true
         },
+        slug: {
+            type: String,
+            unique: true,
+            lowercase: true,
+            index: true,
+        },
         description: {
             type: String,
         },

@@ -88,7 +88,7 @@ router.put('/species/:slug', update)
  *     parameters:
  *       - name: "count"
  *         in: "path"
- *         description: "count product search"
+ *         description: "count species search"
  *         required: true
  *         type: "integer"
  *         format: "int64"
