@@ -11,17 +11,16 @@ const vaccine = new mongoose.Schema(
             type: ObjectId,
             ref: 'Patient'
         },
-        typeOfVaccine: [{
+        typeOfVaccine: {
             type: ObjectId,
             ref: 'TypeOfVaccine'
-        }],
+        },
         nextApplication:{
             type: Date,
-            ref: 'TypeOfVaccine'
         }
         
     },
     { timestamp: true },
 )
 
-module.exports = mongoose.model('Consultation', vaccine)
+module.exports = mongoose.model('Vaccine', vaccine)

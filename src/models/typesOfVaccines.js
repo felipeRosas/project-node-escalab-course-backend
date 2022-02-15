@@ -5,7 +5,9 @@ const typeOfVaccine = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true
+            required: true,
+            minlength: [2, 'too short name'],
+            maxlength: [32, 'too long name']
         },
         slug: {
             type: String,
@@ -14,9 +16,11 @@ const typeOfVaccine = new mongoose.Schema(
             index: true,
         },
         description: {
+            required: true,
             type: String,
         },
-        species: {
+        specie: {
+            required: true,
             type: ObjectId,
             ref: 'Specie'
         },

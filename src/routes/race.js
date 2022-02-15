@@ -81,17 +81,10 @@ router.get('/races/:slug', read)
 
 /**
  * @swagger
- * /races/{count}:
+ * /races:
  *   get:
  *     tags: [Race]
  *     summary: "get a list of races"
- *     parameters:
- *       - name: "count"
- *         in: "path"
- *         description: "count races search"
- *         required: true
- *         type: "integer"
- *         format: "int64"
  *     responses:
  *       200:
  *         description: return a list of races
@@ -105,7 +98,7 @@ router.get('/races/:slug', read)
  *         description: bad request
  * 
  */
-router.get('/races/:count', listAll)
+router.get('/races', listAll)
 
  /**
  * @swagger

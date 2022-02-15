@@ -3,11 +3,9 @@ const Consultation = require('../models/consultation')
 
 exports.create = async (req, res) => {
     try {
-        // const { date, annotation, veterinarian, 
-        //         patient, weightPatient,dateNextConsultation,vaccine} = req.doby
-                res.json( await new Consultation(req.body)
-                            .save()
-                        )
+        console.log('create consultation')
+        const newConsultation = await new Consultation(req.body).save()
+        return res.json(newConsultation)
     } catch (error) {
         console.log(error)
         res.status(400).send('create consultation failed')
@@ -15,16 +13,52 @@ exports.create = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
-    
+    try {
+        const updated = await Consultation.findOneAndUpdate(
+            { _id: req.body._id },
+            req.body,
+            {new: true}
+        ).exec()
+        return res.json(updated)
+    } catch (error) {
+        res.status(400).json({
+            error: error.message,
+            code: error.code
+        })
+    }
 }
-exports.softRemove = async (req, res) => {
-    
+exports.remove = async (req, res) => {
+    try {
+        const deleted = await Consultation.findOneAndRemove( {_id: req.params._id} ).exec()
+        res.json(deleted)
+    } catch (error) {
+        res.status(400).json({
+            error: error.message,
+            code: error.code
+        })
+    }
 }
 
-exports.hardRemove = async (req, res) => {
-
+exports.getByPatient = async (req, res) => {
+    try {
+        const deleted = await Consultation.find( {patient: req.params.idPatient} ).exec()
+        res.json(deleted)
+    } catch (error) {
+        res.status(400).json({
+            error: error.message,
+            code: error.code
+        })
+    }
 }
 
-exports.read = async (req, res) => {
-
+exports.getById = async (req, res) => {
+    try {
+        const consultation = await Consultation.find( {_id: req.params._id} ).exec()
+        res.json(consultation)
+    } catch (error) {
+        res.status(400).json({
+            error: error.message,
+            code: error.code
+        })
+    }
 }

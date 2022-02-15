@@ -1,10 +1,10 @@
-const Patient = require('../models/patient')
+const Vaccine = require('../models/vaccine')
 
 exports.create = async (req, res) => {
     try {
-        console.log("CREATE PATIENT");
-        const newPatient = await new Patient(req.body).save()
-        return res.json(newPatient)
+        console.log("CREATE Vaccine");
+        const newVaccine = await new Vaccine(req.body).save()
+        return res.json(newVaccine)
     } catch (error) {
         res.status(400).json({
             error: error.message,
@@ -15,8 +15,8 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        const updated = await Patient.findOneAndUpdate(
-            { _id: req.body._id },
+        const updated = await Vaccine.findOneAndUpdate(
+            { _id: req.params._id },
             req.body,
             {new: true}
         ).exec()
@@ -31,8 +31,8 @@ exports.update = async (req, res) => {
 
 exports.getById = async (req, res) => {
     try {
-        const patient = await Patient.findOne( {_id:req.params._id} ).exec()
-        res.json(patient)
+        const vaccine = await Vaccine.findOne( {_id:req.params._id} ).exec()
+        res.json(vaccine)
     } catch (error) {
         res.status(400).json({
             error: error.message,
@@ -41,22 +41,10 @@ exports.getById = async (req, res) => {
     }
 }
 
-exports.getByName = async (req, res) => {
+exports.getByPatient = async (req, res) => {
     try {
-        const patients = await Patient.find({"name": req.params.name}).exec()
-        return res.json(patients)
-    } catch (error) {
-        res.status(400).json({
-            error: error.message,
-            code: error.code
-        })
-    }
-}
-
-exports.listAll = async (req, res) => {
-    try {
-        const patients = await Patient.find({}).exec()
-        res.json(patients)
+        const vaccine = await Vaccine.find( {patient:req.params._id} ).exec()
+        res.json(vaccine)
     } catch (error) {
         res.status(400).json({
             error: error.message,
@@ -67,7 +55,7 @@ exports.listAll = async (req, res) => {
 
 exports.remove = async (req, res) => {
     try {
-        const deleted = await Patient.findOneAndRemove( {_id: req.params._id} ).exec()
+        const deleted = await Vaccine.findOneAndRemove( {_id: req.params._id} ).exec()
         res.json(deleted)
     } catch (error) {
         res.status(400).json({

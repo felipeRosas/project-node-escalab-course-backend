@@ -9,6 +9,7 @@ const consultationSchema = new mongoose.Schema(
         },
         annotation: {
             type: String,
+            required: true
         },
         veterinarian: {
             type: ObjectId,

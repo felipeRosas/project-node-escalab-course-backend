@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { create, update, getByID, getByName,listAll, remove} = require('../controllers/patient')
+const { create, update, getById, getByName,listAll, remove} = require('../controllers/patient')
 
 /**
  * @swagger
@@ -82,7 +82,7 @@ router.put('/patients/:_id', update)
  *         description: bad request
  * 
  */
-router.get('/patients/:_id', getByID)
+router.get('/patients/:_id', getById)
 
 /**
  * @swagger

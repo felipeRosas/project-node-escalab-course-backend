@@ -60,7 +60,8 @@ exports.getBySpecie = async (req, res) => {
 
 exports.listAll = async (req, res) => {
     try {
-        const species = await Race.find({}).limit( parseInt(req.params.count) ).exec()
+        const species = await Race.find({}).exec()
+        console.log(species)
         res.json(species)
     } catch (error) {
         res.status(400).json({
