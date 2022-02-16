@@ -22,7 +22,7 @@
         "description": "My API Documentation Developer Server"
       },
       {
-        "url": "http://localhost:8000/api",
+        "url": "https://veterinarian-api.herokuapp.com/api",
         "description": "Production api"
       }
     ],
