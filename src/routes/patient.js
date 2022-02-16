@@ -9,6 +9,9 @@ const {
     vetarinarianCheck,
   } = require("../middlewares/auth");
 
+//validations
+const { validateCreatePatient, validateUpdatePatient } = require('../validations/patient')
+
 /**
  * @swagger
  * /patients:
@@ -31,7 +34,7 @@ const {
  *       400:
  *         description: bad request
  */
-router.post('/patients',authCheck, vetarinarianCheck, create)
+router.post('/patients',authCheck, vetarinarianCheck,validateCreatePatient, create)
 
 /**
  * @swagger

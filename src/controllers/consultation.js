@@ -15,7 +15,7 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     try {
         const updated = await Consultation.findOneAndUpdate(
-            { _id: req.body._id },
+            { _id: req.params._id },
             req.body,
             {new: true}
         ).exec()
@@ -62,3 +62,5 @@ exports.getById = async (req, res) => {
         })
     }
 }
+
+

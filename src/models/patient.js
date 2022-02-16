@@ -15,6 +15,7 @@ const patientSchema = new mongoose.Schema(
         },
         chipNumber: {
             type: Number,
+            required: true
         },
         dateOfBirth: {
             type: Date,

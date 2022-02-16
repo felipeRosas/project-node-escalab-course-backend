@@ -15,8 +15,9 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
+        console.log(req.params)
         const updated = await Patient.findOneAndUpdate(
-            { _id: req.body._id },
+            { _id: req.params._id },
             req.body,
             {new: true}
         ).exec()

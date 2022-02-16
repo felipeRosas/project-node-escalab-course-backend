@@ -9,6 +9,9 @@ const {
     vetarinarianCheck,
   } = require("../middlewares/auth");
 
+  //validations
+const { validateCreateConsultation, validateUpdateConsultation } = require('../validations/consultation')
+
 /**
  * @swagger
  * /consultation:
@@ -31,7 +34,7 @@ const {
  *       400:
  *         description: bad request
  */
-router.post('/consultation',authCheck, vetarinarianCheck, create)
+router.post('/consultation',authCheck, vetarinarianCheck,validateCreateConsultation, create)
 
 /**
  * @swagger
@@ -101,7 +104,7 @@ router.get('/consultation/:_id',authCheck, vetarinarianCheck, getById)
  *       400:
  *         description: bad request  
  */
-router.put('/consultation/:_id',authCheck, vetarinarianCheck, update)
+router.put('/consultation/:_id',authCheck, vetarinarianCheck,validateUpdateConsultation, update)
 
  /**
  * @swagger

@@ -41,8 +41,8 @@ exports.vetarinarianCheck = async (req, res, next) => {
     const adminUser = await User.findOne({ email }).exec();
 
     if (adminUser.role !== "veterinarian") {
-        res.status(403).json({
-        err: "Admin resource. Access denied.",
+        return res.status(403).json({
+        err: "veterinarian resource. Access denied.",
         });
     } else {
         next();

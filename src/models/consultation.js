@@ -13,11 +13,13 @@ const consultationSchema = new mongoose.Schema(
         },
         veterinarian: {
             type: ObjectId,
-            ref: 'User'
+            ref: 'User',
+            required: true
         },
         patient: {
             type: ObjectId,
-            ref: 'Patient'
+            ref: 'Patient',
+            required: true
         },
         weightPatient: {
             type: Number,
