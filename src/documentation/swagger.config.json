@@ -1,37 +1,45 @@
 {
-    "definition": {
-        "openapi": "3.0.0",
-        "info": {
-            "title": "Veterinarian API",
-            "version": "1.0.0",
-            "description": "An api for veterinarian app ",
-            "termsOfService": "http://example.com/terms/",
-            "contact": {
-              "name": "Api Support",
-              "url": "https://escalab.academy/",
-              "email": "feliperosaszambrano@mail.com"
-            },
-            "license": {
-              "name": "MIT",
-              "url": "https://opensource.org/licenses/MIT"
-            }
-        },
-        "servers": [
-            {
-                "url": "http://localhost:8000/api",
-                "description": "My API Documentation Developer Server"
-            }
-        ],
-        "security": [{ "ApiKey": [] }],
-        "components": {
-            "securitySchemes": {
-                "ApiKey": {
-                  "type": "apiKey",
-                  "in": "header",
-                  "name": "authtoken"
-                }
-              }
-        }
+  "definition": {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Veterinarian API",
+      "version": "1.0.0",
+      "description": "An api for veterinarian app ",
+      "termsOfService": "http://example.com/terms/",
+      "contact": {
+        "name": "Api Support",
+        "url": "https://escalab.academy/",
+        "email": "feliperosaszambrano@mail.com"
+      },
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
     },
-    "apis": ["src/routes/*.js"]
+    "servers": [
+      {
+        "url": "http://localhost:8000/api",
+        "description": "My API Documentation Developer Server"
+      },
+      {
+        "url": "http://localhost:8000/api",
+        "description": "Production api"
+      }
+    ],
+    "security": [
+      {
+        "firebase": []
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "ApiKey": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "authtoken"
+        }
+      }
+    }
+  },
+  "apis": ["src/routes/*.js"]
 }

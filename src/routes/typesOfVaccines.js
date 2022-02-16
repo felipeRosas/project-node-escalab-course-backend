@@ -3,6 +3,11 @@ const router = express.Router()
 
 const { create, update, getById, getByName, listAll, remove } = require('../controllers/typesOfVaccines')
 
+// middlewares
+const {
+    authCheck,
+    vetarinarianCheck,
+  } = require("../middlewares/auth");
 
 /**
  * @swagger
@@ -10,6 +15,10 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
  *   post:
  *     summary: create a new type of vaccine
  *     tags: [TypeOfVaccine]
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -26,7 +35,7 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
  *       400:
  *         description: bad request
  */
- router.post('/typeOfVaccine', create)
+ router.post('/typeOfVaccine',authCheck, vetarinarianCheck, create)
 
  /**
   * @swagger
@@ -40,6 +49,9 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
   *         description: "slug of type of vaccine"
   *         required: true
   *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
   *     requestBody:
   *       required: true
   *       content:
@@ -56,7 +68,7 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
   *       400:
   *         description: bad request  
   */
- router.put('/typeOfVaccine/:slug', update)
+ router.put('/typeOfVaccine/:slug',authCheck, vetarinarianCheck, update)
  
  /**
   * @swagger
@@ -70,6 +82,9 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
   *         description: "id of a TypeOfVaccine"
   *         required: true
   *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
   *     responses:
   *       200:
   *         description: return a single TypeOfVaccine
@@ -83,7 +98,7 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
   *         description: bad request
   * 
   */
- router.get('/typeOfVaccine/:_id', getById)
+ router.get('/typeOfVaccine/:_id',authCheck, getById)
  
  /**
   * @swagger
@@ -97,6 +112,9 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
   *         description: "name of TypeOfVaccine"
   *         required: true
   *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
   *     responses:
   *       200:
   *         description: returns TypeOfVaccine with the same name
@@ -110,7 +128,7 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
   *         description: bad request
   * 
   */
- router.get('/typeOfVaccine/byName/:slug', getByName)
+ router.get('/typeOfVaccine/byName/:slug',authCheck, getByName)
  
  /**
   * @swagger
@@ -118,6 +136,10 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
   *   get:
   *     tags: [TypeOfVaccine]
   *     summary: "get a list of all TypeOfVaccine"
+  *     parameters:
+  *       - name: authtoken
+  *         in: header
+  *         description: an authorization token JWT-ouath2
   *     responses:
   *       200:
   *         description: return a list of TypeOfVaccine
@@ -131,7 +153,7 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
   *         description: bad request
   * 
   */
- router.get('/typeOfVaccine', listAll)
+ router.get('/typeOfVaccine',authCheck, listAll)
  
   /**
   * @swagger
@@ -146,6 +168,9 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
   *         description: "slug of TypeOfVaccine"
   *         required: true
   *         type: "string"
+  *       - name: authtoken
+  *         in: header
+  *         description: an authorization token JWT-ouath2
   *     responses:
   *       200:
   *         description: returns the deleted TypeOfVaccine
@@ -153,7 +178,7 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
   *           $ref: "#/components/schemas/TypeOfVaccine"
   * 
   */
- router.delete('/patients/:slug', remove)
+ router.delete('/patients/:slug',authCheck, vetarinarianCheck, remove)
  
  module.exports = router
  

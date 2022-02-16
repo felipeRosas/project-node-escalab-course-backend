@@ -17,6 +17,14 @@ const userSchema = new mongoose.Schema(
             lowercase: true,
             index: true,
         },
+        userName: {
+            type: String
+        },
+        email: {
+            type: String,
+            required: true,
+            index: true,
+        },
         role: {
             type: String,
             enum: ["owner", "veterinarian", "admin"],

@@ -2,12 +2,23 @@ const express = require('express')
 const { create, update, getById, remove, getByPatient } = require('../controllers/vaccine')
 const router = express.Router()
 
+// middlewares
+const {
+    authCheck,
+    adminCheck,
+    vetarinarianCheck,
+  } = require("../middlewares/auth");
+
 /**
  * @swagger
  * /vaccine:
  *   post:
  *     summary: create a vaccine
  *     tags: [Vaccine]
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -24,7 +35,7 @@ const router = express.Router()
  *       400:
  *         description: bad request
  */
-router.post('/vaccine', create)
+router.post('/vaccine', authCheck, vetarinarianCheck, create)
 
 /**
  * @swagger
@@ -38,6 +49,9 @@ router.post('/vaccine', create)
  *         description: "id of vaccine"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -54,7 +68,7 @@ router.post('/vaccine', create)
  *       400:
  *         description: bad request  
  */
-router.put('/vaccine/:_id', update)
+router.put('/vaccine/:_id', authCheck, vetarinarianCheck, update)
 
 /**
  * @swagger
@@ -68,6 +82,9 @@ router.put('/vaccine/:_id', update)
  *         description: "id of vaccine"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -84,7 +101,7 @@ router.put('/vaccine/:_id', update)
  *       400:
  *         description: bad request  
  */
-router.get('/vaccine/:_id', getById)
+router.get('/vaccine/:_id', authCheck, vetarinarianCheck, getById)
 
 /**
  * @swagger
@@ -98,6 +115,9 @@ router.get('/vaccine/:_id', getById)
  *         description: "id of patient"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: returns a list of vaccines of a patient
@@ -111,7 +131,7 @@ router.get('/vaccine/:_id', getById)
  *         description: bad request
  * 
  */
-router.get('/vaccine/byPatient/:idPatient', getByPatient)
+router.get('/vaccine/byPatient/:idPatient',authCheck, vetarinarianCheck, getByPatient)
 
  /**
  * @swagger
@@ -126,6 +146,9 @@ router.get('/vaccine/byPatient/:idPatient', getByPatient)
  *         description: "id of vaccine"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: returns the deleted vaccine register
@@ -133,7 +156,7 @@ router.get('/vaccine/byPatient/:idPatient', getByPatient)
  *           $ref: "#/components/schemas/Vaccine"
  * 
  */
-router.delete('/vaccine/_id', remove)
+router.delete('/vaccine/_id',authCheck, vetarinarianCheck, remove)
 
 module.exports = router
 

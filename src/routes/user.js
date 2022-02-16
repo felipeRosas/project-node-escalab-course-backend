@@ -173,12 +173,19 @@ module.exports = router
  *                type: string
  *              lastName:
  *                type: string
+ *              email:
+ *                type: string
+ *              userName:
+ *                type: string
+ *              slug:
+ *                type: string
  *              role:
  *                type: string
  *                default: 'owner'
  *                enum:
  *                  - 'owner'
  *                  - 'veterinarian'
+ *                  - 'admin'
  *              address:
  *                type: string
  *              rut:

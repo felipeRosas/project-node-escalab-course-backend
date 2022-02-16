@@ -3,6 +3,12 @@ const router = express.Router()
 
 const { create, update, read, listAll, remove} = require('../controllers/race')
 
+// middlewares
+const {
+    authCheck,
+    vetarinarianCheck,
+  } = require("../middlewares/auth");
+
 /**
  * @swagger
  * /races:
@@ -25,7 +31,7 @@ const { create, update, read, listAll, remove} = require('../controllers/race')
  *       400:
  *         description: bad request  
  */
-router.post('/races', create)
+router.post('/races', authCheck, vetarinarianCheck, create)
 
 /**
  * @swagger
@@ -55,7 +61,7 @@ router.post('/races', create)
  *       400:
  *         description: bad request  
  */
-router.put('/races/:slug', update)
+router.put('/races/:slug', authCheck, vetarinarianCheck, update)
 
  /**
  * @swagger
@@ -77,7 +83,7 @@ router.put('/races/:slug', update)
  *           $ref: "#/components/schemas/Race"
  * 
  */
-router.get('/races/:slug', read)
+router.get('/races/:slug', authCheck, read)
 
 /**
  * @swagger
@@ -98,7 +104,7 @@ router.get('/races/:slug', read)
  *         description: bad request
  * 
  */
-router.get('/races', listAll)
+router.get('/races', authCheck, listAll)
 
  /**
  * @swagger
@@ -120,7 +126,7 @@ router.get('/races', listAll)
  *           $ref: "#/components/schemas/Race"
  * 
  */
-router.delete('/races/:slug', remove)
+router.delete('/races/:slug', authCheck, vetarinarianCheck, remove)
 
 
 module.exports = router

@@ -3,6 +3,11 @@ const router = express.Router()
 
 const { create, update, read, listAll, getAll, remove} = require('../controllers/specie')
 
+// middlewares
+const {
+    authCheck,
+    vetarinarianCheck,
+  } = require("../middlewares/auth");
 
 /**
  * @swagger
@@ -26,7 +31,7 @@ const { create, update, read, listAll, getAll, remove} = require('../controllers
  *       400:
  *         description: bad request  
  */
-router.post('/species', create)
+router.post('/species',authCheck, vetarinarianCheck, create)
 
 /**
  * @swagger
@@ -56,7 +61,7 @@ router.post('/species', create)
  *       400:
  *         description: bad request  
  */
-router.put('/species/:slug', update)
+router.put('/species/:slug',authCheck, vetarinarianCheck, update)
 
 /**
  * @swagger
@@ -77,7 +82,7 @@ router.put('/species/:slug', update)
  *         description: bad request, count is required
  * 
  */
- router.get('/species', getAll)
+ router.get('/species',authCheck, getAll)
 
 /**
  * @swagger
@@ -105,7 +110,7 @@ router.put('/species/:slug', update)
  *         description: bad request, count is required
  * 
  */
- router.get('/species/:count', listAll)
+ router.get('/species/:count',authCheck, listAll)
 
  /**
  * @swagger
@@ -127,7 +132,7 @@ router.put('/species/:slug', update)
  *           $ref: "#/components/schemas/Specie"
  * 
  */
-router.get('/species/:slug', read)
+router.get('/species/:slug',authCheck, read)
 
  /**
  * @swagger
@@ -149,7 +154,7 @@ router.get('/species/:slug', read)
  *           $ref: "#/components/schemas/Specie"
  * 
  */
-router.delete('/species/:slug', remove)
+router.delete('/species/:slug',authCheck, vetarinarianCheck, remove)
 
 
 module.exports = router

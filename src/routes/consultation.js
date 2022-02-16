@@ -3,6 +3,12 @@ const router = express.Router()
 
 const { create, update, remove, getByPatient, getById} = require('../controllers/consultation')
 
+// middlewares
+const {
+    authCheck,
+    vetarinarianCheck,
+  } = require("../middlewares/auth");
+
 /**
  * @swagger
  * /consultation:
@@ -25,7 +31,7 @@ const { create, update, remove, getByPatient, getById} = require('../controllers
  *       400:
  *         description: bad request
  */
-router.post('/consultation', create)
+router.post('/consultation',authCheck, vetarinarianCheck, create)
 
 /**
  * @swagger
@@ -46,7 +52,7 @@ router.post('/consultation', create)
  *         description: bad request
  * 
  */
-router.get('/consultation/byPatient/:idPatient', getByPatient)
+router.get('/consultation/byPatient/:idPatient',authCheck, vetarinarianCheck, getByPatient)
 
 /**
  * @swagger
@@ -65,7 +71,7 @@ router.get('/consultation/byPatient/:idPatient', getByPatient)
  *         description: bad request
  * 
  */
-router.get('/consultation/:_id', getById)
+router.get('/consultation/:_id',authCheck, vetarinarianCheck, getById)
 
 /**
  * @swagger
@@ -95,7 +101,7 @@ router.get('/consultation/:_id', getById)
  *       400:
  *         description: bad request  
  */
-router.put('/consultation/:_id', update)
+router.put('/consultation/:_id',authCheck, vetarinarianCheck, update)
 
  /**
  * @swagger
@@ -117,7 +123,7 @@ router.put('/consultation/:_id', update)
  *           $ref: "#/components/schemas/Consultation"
  * 
  */
-router.delete('/consultation/:_id', remove)
+router.delete('/consultation/:_id',authCheck, vetarinarianCheck, remove)
 
 
 module.exports = router

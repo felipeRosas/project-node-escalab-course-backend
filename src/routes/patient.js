@@ -3,6 +3,12 @@ const router = express.Router()
 
 const { create, update, getById, getByName,listAll, remove} = require('../controllers/patient')
 
+// middlewares
+const {
+    authCheck,
+    vetarinarianCheck,
+  } = require("../middlewares/auth");
+
 /**
  * @swagger
  * /patients:
@@ -25,7 +31,7 @@ const { create, update, getById, getByName,listAll, remove} = require('../contro
  *       400:
  *         description: bad request
  */
-router.post('/patients', create)
+router.post('/patients',authCheck, vetarinarianCheck, create)
 
 /**
  * @swagger
@@ -55,7 +61,7 @@ router.post('/patients', create)
  *       400:
  *         description: bad request  
  */
-router.put('/patients/:_id', update)
+router.put('/patients/:_id',authCheck, vetarinarianCheck, update)
 
 /**
  * @swagger
@@ -82,7 +88,7 @@ router.put('/patients/:_id', update)
  *         description: bad request
  * 
  */
-router.get('/patients/:_id', getById)
+router.get('/patients/:_id',authCheck, vetarinarianCheck, getById)
 
 /**
  * @swagger
@@ -109,7 +115,7 @@ router.get('/patients/:_id', getById)
  *         description: bad request
  * 
  */
-router.get('/patient/byName/:name', getByName)
+router.get('/patient/byName/:name',authCheck, vetarinarianCheck, getByName)
 
 /**
  * @swagger
@@ -130,7 +136,7 @@ router.get('/patient/byName/:name', getByName)
  *         description: bad request
  * 
  */
-router.get('/patients', listAll)
+router.get('/patients',authCheck, vetarinarianCheck, listAll)
 
  /**
  * @swagger
@@ -152,7 +158,7 @@ router.get('/patients', listAll)
  *           $ref: "#/components/schemas/Patient"
  * 
  */
-router.delete('/patients/:_id', remove)
+router.delete('/patients/:_id',authCheck, vetarinarianCheck, remove)
 
 module.exports = router
 
