@@ -15,10 +15,10 @@ exports.createOrUpdateUser = async (req,res) => {
             console.log('user updated', user)
             res.json(user)
         } else {
-            const { name, lastName, address, rut, dateOfBirth, phone} = req.body
+            const { name, lastName, address, rut, dateOfBirth, phone, role} = req.body
             const slug = slugify(`${name.toLowerCase()} ${lastName.toLowerCase()}`)
             const newUser = await new User({
-                email, userName,name, lastName, address, rut, dateOfBirth, phone,slug
+                email, userName,name, lastName, address, rut, dateOfBirth, phone,slug, role
             }).save()
             console.log('new user', user)
             return res.json(newUser)
