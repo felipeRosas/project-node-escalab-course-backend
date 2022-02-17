@@ -131,7 +131,7 @@ router.get('/patients/:_id',authCheck, vetarinarianCheck, getById)
  *         description: bad request
  * 
  */
-router.get('/patient/byName/:name',authCheck, vetarinarianCheck, getByName)
+router.get('/patients/byName/:name',authCheck, vetarinarianCheck, getByName)
 
 /**
  * @swagger
