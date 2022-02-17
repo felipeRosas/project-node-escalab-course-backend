@@ -157,7 +157,7 @@ module.exports = router
  *      Consultation:
  *        type: object
  *        required:
- *          - data
+ *          - date
  *          - annotation
  *        properties:
  *          date:
@@ -166,14 +166,14 @@ module.exports = router
  *          annotation:
  *            type: string
  *            lowercase: true
- *          veterinarian:
- *            #ref: '#/components/schemas/User'
- *          patient:
- *            #ref: '#/components/schemas/Patient'
  *          weightPatient:
  *            type: Number
  *          dateNextConsultation:
  *            type: Date
+ *          veterinarian:
+ *            $ref: '#/components/schemas/User'
+ *          patient:
+ *            $ref: '#/components/schemas/Patient'
  *          vaccine:
  *            $ref: '#/components/schemas/Vaccine'
  *            
