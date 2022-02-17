@@ -15,6 +15,10 @@ const {
  *   post:
  *     summary: create a new race
  *     tags: [Race]
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -45,6 +49,9 @@ router.post('/races', authCheck, vetarinarianCheck, create)
  *         description: "slug of race"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -76,6 +83,9 @@ router.put('/races/:slug', authCheck, vetarinarianCheck, update)
  *         description: "slug of race"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return an specific race
@@ -91,6 +101,10 @@ router.get('/races/:slug', authCheck, read)
  *   get:
  *     tags: [Race]
  *     summary: "get a list of races"
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return a list of races
@@ -119,6 +133,9 @@ router.get('/races', authCheck, listAll)
  *         description: "slug of race"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: returns the deleted race

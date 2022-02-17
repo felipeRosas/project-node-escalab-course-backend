@@ -18,6 +18,10 @@ const { validateCreateConsultation, validateUpdateConsultation } = require('../v
  *   post:
  *     summary: create a new consultation register
  *     tags: [Consultation]
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -42,6 +46,10 @@ router.post('/consultation',authCheck, vetarinarianCheck,validateCreateConsultat
  *   get:
  *     tags: [Consultation]
  *     summary: "get a list of all consultations of a patient"
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return a list of consultations of a patient
@@ -63,6 +71,10 @@ router.get('/consultation/byPatient/:idPatient',authCheck, vetarinarianCheck, ge
  *   get:
  *     tags: [Consultation]
  *     summary: "get a consultations by id"
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return a consultation
@@ -88,6 +100,9 @@ router.get('/consultation/:_id',authCheck, vetarinarianCheck, getById)
  *         description: "id of consultation"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -119,6 +134,9 @@ router.put('/consultation/:_id',authCheck, vetarinarianCheck,validateUpdateConsu
  *         description: "id of consultation"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: returns the deleted consultation

@@ -15,6 +15,10 @@ const {
  *   post:
  *     summary: create a new specie
  *     tags: [Specie]
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -45,6 +49,9 @@ router.post('/species',authCheck, vetarinarianCheck, create)
  *         description: "slug of specie"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -69,6 +76,10 @@ router.put('/species/:slug',authCheck, vetarinarianCheck, update)
  *   get:
  *     tags: [Specie]
  *     summary: "get all species"
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return a list of species
@@ -97,6 +108,9 @@ router.put('/species/:slug',authCheck, vetarinarianCheck, update)
  *         required: true
  *         type: "integer"
  *         format: "int64"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return a list of species
@@ -125,6 +139,9 @@ router.put('/species/:slug',authCheck, vetarinarianCheck, update)
  *         description: "slug of specie"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return an specific specie
@@ -147,6 +164,9 @@ router.get('/species/:slug',authCheck, read)
  *         description: "slug of specie"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: returns the deleted species

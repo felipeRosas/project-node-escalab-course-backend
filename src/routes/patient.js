@@ -18,6 +18,10 @@ const { validateCreatePatient, validateUpdatePatient } = require('../validations
  *   post:
  *     summary: create a patient record
  *     tags: [Patient]
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -48,6 +52,9 @@ router.post('/patients',authCheck, vetarinarianCheck,validateCreatePatient, crea
  *         description: "id of patient"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -64,7 +71,7 @@ router.post('/patients',authCheck, vetarinarianCheck,validateCreatePatient, crea
  *       400:
  *         description: bad request  
  */
-router.put('/patients/:_id',authCheck, vetarinarianCheck, update)
+router.put('/patients/:_id',authCheck, vetarinarianCheck,validateUpdatePatient, update)
 
 /**
  * @swagger
@@ -78,6 +85,9 @@ router.put('/patients/:_id',authCheck, vetarinarianCheck, update)
  *         description: "id of a patient"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return a single patient
@@ -105,6 +115,9 @@ router.get('/patients/:_id',authCheck, vetarinarianCheck, getById)
  *         description: "name of patient"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: returns patients with the same name
@@ -126,6 +139,10 @@ router.get('/patient/byName/:name',authCheck, vetarinarianCheck, getByName)
  *   get:
  *     tags: [Patient]
  *     summary: "get a list of all patients"
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return a list of patients
@@ -154,6 +171,9 @@ router.get('/patients',authCheck, vetarinarianCheck, listAll)
  *         description: "id of patient"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: returns the deleted patient

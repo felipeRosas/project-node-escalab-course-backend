@@ -2,12 +2,22 @@ const express = require('express')
 const router = express.Router()
 const { create, update, getById, getByName, listAll, remove } = require('../controllers/user')
 
+// middlewares
+const {
+    authCheck,
+    vetarinarianCheck
+} = require("../middlewares/auth");
+
 /**
  * @swagger
  * /users:
  *  post:
  *      summary: create a new user
  *      tags: [User]
+ *      parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *      requestBody:
  *          required: true
  *          content:
@@ -24,7 +34,7 @@ const { create, update, getById, getByName, listAll, remove } = require('../cont
  *          400:
  *              description: bad request
  */ 
-router.post('/users', create)
+router.post('/users',vetarinarianCheck, create)
 
 /**
  * @swagger
@@ -38,6 +48,9 @@ router.post('/users', create)
  *         description: "id of user"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     requestBody:
  *       required: true
  *       content:
@@ -54,7 +67,7 @@ router.post('/users', create)
  *       400:
  *         description: bad request  
  */
-router.put('/users/:_id', update)
+router.put('/users/:_id',vetarinarianCheck, update)
 
 /**
  * @swagger
@@ -68,6 +81,9 @@ router.put('/users/:_id', update)
  *         description: "id of a user"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return a single user
@@ -81,7 +97,7 @@ router.put('/users/:_id', update)
  *         description: bad request
  * 
  */
-router.get('/users/:_id', getById)
+router.get('/users/:_id',authCheck, getById)
 
 /**
  * @swagger
@@ -95,6 +111,9 @@ router.get('/users/:_id', getById)
  *         description: "name of user"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: returns users with the same name
@@ -108,7 +127,7 @@ router.get('/users/:_id', getById)
  *         description: bad request
  * 
  */
-router.get('/users/byName/:slug', getByName)
+router.get('/users/byName/:slug',vetarinarianCheck, getByName)
 
 /**
  * @swagger
@@ -116,6 +135,10 @@ router.get('/users/byName/:slug', getByName)
  *   get:
  *     tags: [User]
  *     summary: "get a list of all users"
+ *     parameters:
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: return a list of users
@@ -129,7 +152,7 @@ router.get('/users/byName/:slug', getByName)
  *         description: bad request
  * 
  */
-router.get('/users', listAll)
+router.get('/users',vetarinarianCheck, listAll)
 
  /**
  * @swagger
@@ -144,6 +167,9 @@ router.get('/users', listAll)
  *         description: "slug of user"
  *         required: true
  *         type: "string"
+ *       - name: authtoken
+ *         in: header
+ *         description: an authorization token JWT-ouath2
  *     responses:
  *       200:
  *         description: returns the deleted patient
@@ -151,7 +177,7 @@ router.get('/users', listAll)
  *           $ref: "#/components/schemas/User"
  * 
  */
-router.delete('/users/:slug', remove)
+router.delete('/users/:slug',vetarinarianCheck, remove)
 
 module.exports = router
 
