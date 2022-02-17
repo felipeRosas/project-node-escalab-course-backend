@@ -1,8 +1,9 @@
 const TypeOfVaccine = require('../models/typesOfVaccines')
-
+const slugify = require('slugify')
 exports.create = async (req, res) => {
     try {
         console.log("CREATE typeOfVaccine");
+        req.body.slug = slugify(req.body.name)
         const typeOfVaccine = await new TypeOfVaccine(req.body).save()
         return res.json(typeOfVaccine)
     } catch (error) {
